@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "timeandspace:item/ores/unrefined_zeiton_crystal"
+  }
+}

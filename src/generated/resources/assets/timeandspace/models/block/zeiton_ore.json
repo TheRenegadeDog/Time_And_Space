@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "timeandspace:block/zeiton_ore"
+  }
+}
