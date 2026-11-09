@@ -1,41 +1,32 @@
 package net.therenegadedog.timeandspace.Datagen;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
-import net.minecraft.world.level.storage.loot.providers.number.ints.UniformGenerator;
 import net.therenegadedog.timeandspace.block.ModBlocks;
 import net.therenegadedog.timeandspace.item.ModItems;
+import org.jspecify.annotations.NonNull;
 
-import java.util.List;
 import java.util.Set;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
-    public ModBlockLootTableProvider(LootTableSubProvider.Context output) {
-        super(
-                output,
-                Set.of(),
-                List.of(
-                        new LootTableProvider.SubProviderEntry(
-                                ModBlockLoot::new,
-                                LootContextParamSets.BLOCK
-                        )
-                )
-        );
+    public ModBlockLootTableProvider(LootTableSubProvider.Context context) {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), context);
+    }
+
+    @Override
+    protected @NonNull Iterable<Block> getKnownBlocks() {
+        return ModBlocks.BLOCKS.getEntries().stream()
+                .map(e -> (Block) e.value())
+                .toList();
     }
 
     @Override
